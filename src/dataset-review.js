@@ -27,9 +27,40 @@ class DatasetReview {
 
             reviewCard.classed("d-none", false);
             reviewCard.classed("animate__animated animate__bounceIn animate__faster", true);
+
+            window.addEventListener("keydown", (event) => {
+                console.log(event.key);
+                switch (event.key) {
+                    case "ArrowLeft":
+                    case "ArrowUp":
+                        this.cycleRecord("down");
+                        break;
+                    case "ArrowRight":
+                    case "ArrowDown":
+                        this.cycleRecord("up");
+                        break;
+                }
+            });
         }, 500);
 
         this.showRecord(this.currentIndex);
+    }
+
+    cycleRecord(action) {
+        let index;
+        if (action == "up") {
+            index = this.currentIndex + 1;
+        } else if (action == "down") {
+            index = this.currentIndex - 1;
+        } else {
+            console.log("What action is this?", action);
+        }
+
+        if (index < 0 || index >= this.maxIndex) {
+            return;
+        }
+
+        this.showRecord(index);
     }
 
     showRecord(index) {
@@ -84,7 +115,7 @@ class DatasetReview {
         let table = tableDiv.append('table');
         table.classed("text-center", "true");
         table.classed("w-100", true);
-        
+
         let thead = table.append('thead')
         let tbody = table.append('tbody');
 
