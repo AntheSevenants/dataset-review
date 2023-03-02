@@ -29,7 +29,6 @@ class DatasetReview {
             reviewCard.classed("animate__animated animate__bounceIn animate__faster", true);
 
             window.addEventListener("keydown", (event) => {
-                console.log(event.key);
                 switch (event.key) {
                     case "ArrowLeft":
                     case "ArrowUp":
