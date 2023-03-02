@@ -137,6 +137,7 @@ class DatasetReview {
             .data(row => this.dataset.columns.map((column) => ({ column: column, value: row[column] })))
             .enter()
             .append('td')
+            .classed("monospace", true)
             .text((d) => d.value);
     }
 }
