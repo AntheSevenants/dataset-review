@@ -42,16 +42,18 @@
             </div>
         </div>
 
-        <div class="card fs-1 d-none" id="review_card">
-            <div class="card-body">
-                review card
+        <div class="card d-none" id="review_card">
+            <div class="card-body" id="review_card_body">
+                <div id="table" class="fs-1"></div>
+                <p class="text-center text-muted fs-4 pt-2"><input type="number" class="index d-inline text-muted"
+                        dir="rtl" id="current_index">/<span id="max_index" class="pe-4"></span></p>
             </div>
         </div>
 
         <!-- dataset-review -->
         <script src="src/dataset-review.js"></script>
         <script>
-            new DatasetReview();
+            datasetReview = new DatasetReview();
         </script>
 </body>
 

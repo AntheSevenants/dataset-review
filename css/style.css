@@ -1,3 +1,7 @@
 .card {
     border-radius: 15px !important;
 }
+
+.index {
+    border: none;;
+}
