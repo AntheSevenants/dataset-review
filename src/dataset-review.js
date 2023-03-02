@@ -82,6 +82,9 @@ class DatasetReview {
 
     createRegularTable(tableDiv, index) {
         let table = tableDiv.append('table');
+        table.classed("text-center", "true");
+        table.classed("w-100", true);
+        
         let thead = table.append('thead')
         let tbody = table.append('tbody');
 
