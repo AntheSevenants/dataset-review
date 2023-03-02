@@ -39,6 +39,11 @@ class DatasetReview {
                     case "ArrowDown":
                     case " ":
                     case "k":
+                        if (event.key == " " && event.shiftKey) {
+                            this.cycleRecord("down");
+                            break;
+                        }
+
                         this.cycleRecord("up");
                         break;
                 }
