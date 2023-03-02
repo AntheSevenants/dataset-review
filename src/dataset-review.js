@@ -36,6 +36,7 @@ class DatasetReview {
                         break;
                     case "ArrowRight":
                     case "ArrowDown":
+                    case " ":
                         this.cycleRecord("up");
                         break;
                 }
