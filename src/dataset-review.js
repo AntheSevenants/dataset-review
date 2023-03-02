@@ -14,9 +14,19 @@ class DatasetReview {
     load(dataset) {
         this.dataset = dataset;
 
+        this.currentIndex = 0;
+        this.maxIndex = dataset.length;
+
         let landingCard = d3.select("#landing_card");
         landingCard.classed("animate__animated animate__bounceOut animate__faster", true);
 
-        setTimeout(() => { landingCard.attr("class", "d-none"); }, 500);
+        let reviewCard = d3.select("#review_card");
+
+        setTimeout(() => {
+            landingCard.attr("class", "d-none");
+
+            reviewCard.classed("d-none", false);
+            reviewCard.classed("animate__animated animate__bounceIn animate__faster", true);
+        }, 500);
     }
 }
