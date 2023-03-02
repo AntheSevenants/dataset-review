@@ -36,7 +36,6 @@ class DatasetReview {
         this.currentIndex = index;
 
         let reviewCardBody = d3.select("#review_card_body");
-        let tableDiv = d3.select("#table");
 
         let currentIndex = d3.select("#current_index");
         currentIndex.node().value = index + 1;
@@ -49,11 +48,20 @@ class DatasetReview {
 
         d3.select("#max_index").html(this.maxIndex);
 
-        let data = this.dataset.columns.map((column) => [column, this.dataset[index][column]]);
-
+        let tableDiv = d3.select("#table");
         tableDiv.html("");
 
-        let table = tableDiv.append('table')
+        if (this.dataset.columns.length >= 2) {
+            this.createTransposedTable(tableDiv, index);
+        } else {
+            this.createRegularTable(tableDiv, index);
+        }
+    }
+
+    createTransposedTable(tableDiv, index) {
+        let data = this.dataset.columns.map((column) => [column, this.dataset[index][column]]);
+
+        let table = tableDiv.append('table');
 
         // create a row for each object in the data
         let rows = table.selectAll("tr")
@@ -70,5 +78,31 @@ class DatasetReview {
             .classed("pe-4", (d, index) => index == 0)
             .classed("monospace", (d, index) => index != 0)
             .html(d => d.value);
+    }
+
+    createRegularTable(tableDiv, index) {
+        let table = tableDiv.append('table');
+        let thead = table.append('thead')
+        let tbody = table.append('tbody');
+
+        // Append the header row
+        thead.append('tr')
+            .selectAll('th')
+            .data(this.dataset.columns).enter()
+            .append('th')
+            .text(column => column);
+
+        // Create a row for each object in the data
+        let rows = tbody.selectAll('tr')
+            .data(this.dataset.slice(index, index + 1))
+            .enter()
+            .append('tr');
+
+        // Create a cell in each row for each column
+        let cells = rows.selectAll('td')
+            .data(row => this.dataset.columns.map((column) => ({ column: column, value: row[column] })))
+            .enter()
+            .append('td')
+            .text((d) => d.value);
     }
 }
