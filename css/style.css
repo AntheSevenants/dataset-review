@@ -5,3 +5,7 @@
 .index {
     border: none;;
 }
+
+.monospace {
+    font-family: "IBM Plex Mono";
+}

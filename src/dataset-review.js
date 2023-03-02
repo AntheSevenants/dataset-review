@@ -42,9 +42,8 @@ class DatasetReview {
         currentIndex.node().value = index + 1;
         currentIndex.node().min = 1;
         currentIndex.node().max = this.maxIndex;
-        currentIndex.node().style.width = "3ch";
+        currentIndex.node().style.width = (2 + index.toString().length) + "ch";
         currentIndex.on("input", (event) => {
-            event.target.style.width = 2 + event.target.value.length + "ch";
             this.showRecord(parseInt(event.target.value) - 1);
         });
 
@@ -69,6 +68,7 @@ class DatasetReview {
             .append("td")
             .style("font-weight", (d, index) => index == 0 ? "bold" : "normal")
             .classed("pe-4", (d, index) => index == 0)
+            .classed("monospace", (d, index) => index != 0)
             .html(d => d.value);
     }
 }
