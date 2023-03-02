@@ -28,8 +28,8 @@
     <!-- Favicon related resources -->
 </head>
 
-<body class="h-100">
-    <div class="container d-flex align-items-center justify-content-center h-100">
+<body class="h-100 overflow-hidden">
+    <div class="container d-flex align-items-center justify-content-center h-100 overflow-hidden" id="landing_card">
         <div class="card fs-5 animate__animated animate__pulse animate__faster">
             <div class="card-body">
                 <h4 class="card-title text-center"><i class="bi bi-database-fill"></i> dataset-review</h5>
@@ -47,10 +47,10 @@
             </div>
         </div>
 
-
-        <!-- Main script -->
+        <!-- dataset-review -->
+        <script src="src/dataset-review.js"></script>
         <script>
-            rekker = new Rekker();
+            new DatasetReview();
         </script>
 </body>
 
