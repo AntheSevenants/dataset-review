@@ -41,6 +41,15 @@ class DatasetReview {
                         break;
                 }
             });
+
+            window.addEventListener("wheel", event => {
+                const delta = Math.sign(event.deltaY);
+                if (delta > 0) {
+                    this.cycleRecord("up");
+                } else {
+                    this.cycleRecord("down");
+                }
+            });
         }, 500);
 
         this.showRecord(this.currentIndex);
