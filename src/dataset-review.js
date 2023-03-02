@@ -32,7 +32,6 @@ class DatasetReview {
         this.showRecord(this.currentIndex);
     }
 
-    // https://gist.github.com/jfreels/6734025
     showRecord(index) {
         this.currentIndex = index;
 
@@ -41,7 +40,7 @@ class DatasetReview {
 
         let currentIndex = d3.select("#current_index");
         currentIndex.node().value = index + 1;
-        currentIndex.node().min = index + 1;
+        currentIndex.node().min = 1;
         currentIndex.node().max = this.maxIndex;
         currentIndex.node().style.width = "3ch";
         currentIndex.on("input", (event) => {
@@ -51,30 +50,25 @@ class DatasetReview {
 
         d3.select("#max_index").html(this.maxIndex);
 
+        let data = this.dataset.columns.map((column) => [column, this.dataset[index][column]]);
+
         tableDiv.html("");
 
         let table = tableDiv.append('table')
-        let thead = table.append('thead')
-        let tbody = table.append('tbody');
 
-        // Append the header row
-        thead.append('tr')
-            .selectAll('th')
-            .data(this.dataset.columns).enter()
-            .append('th')
-            .text(column => column);
-
-        // Create a row for each object in the data
-        let rows = tbody.selectAll('tr')
-            .data(this.dataset.slice(index, index + 1))
+        // create a row for each object in the data
+        let rows = table.selectAll("tr")
+            .data(data)
             .enter()
-            .append('tr');
+            .append("tr");
 
-        // Create a cell in each row for each column
-        let cells = rows.selectAll('td')
-            .data(row => this.dataset.columns.map((column) => ({ column: column, value: row[column] })))
+        // create a cell in each row for each column
+        let cells = rows.selectAll("td")
+            .data((row) => [...Array(data[0].length).keys()].map((column, index) => ({ value: row[index] })))
             .enter()
-            .append('td')
-            .text((d) => d.value);
+            .append("td")
+            .style("font-weight", (d, index) => index == 0 ? "bold" : "normal")
+            .classed("pe-4", (d, index) => index == 0)
+            .html(d => d.value);
     }
 }
