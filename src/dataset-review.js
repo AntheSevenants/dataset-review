@@ -1,9 +1,17 @@
 class DatasetReview {
     constructor() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        
+        let delimiter = ",";
+        if (urlParams.has("delimiter")) {
+            delimiter = urlParams.get("delimiter");
+        }
+
         d3.select("#input_dataset").on("change", (event) => {
             let reader = new FileReader()
             reader.onload = () => {
-                d3.csv(reader.result, d3.autoType).then((dataset) => {
+                d3.dsv(delimiter, reader.result).then((dataset) => {
                     this.load(dataset);
                 });
             }

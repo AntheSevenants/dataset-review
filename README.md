@@ -9,3 +9,5 @@ This is a simple CSV file viewer which shows you one record of your CSV file at 
 
 1. Go to the [dataset-review webpage](https://anthesevenants.github.io/dataset-review/)
 2. Click "Choose File" and select your CSV dataset
+
+Is your CSV file delimited by a delimiter other than `,`? Add `?delimiter=` to the URL and specify your own delimiter. E.g. if your delimiter is a semicolon, the url should be `https://anthesevenants.github.io/dataset-review/?delimiter=;`.
